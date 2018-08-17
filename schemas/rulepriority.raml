@@ -20,3 +20,35 @@ schemas:
   - create: !include schemas/oic.if.create-schema.json
   - create-response: !include schemas/oic.if.create-response-schema.json
   - delete-Response: !include schemas/oic.if.delete-response-schema.json
+
+traits:
+  - interface:
+      queryParameters:
+        if:
+          enum: ["oic.if.rw", "oic.if.ll", "oic.if.b", "oic.if.baseline", "oic.if.create", "oic.if.delete", "oic.if.linkupdate"]
+
+
+/RuleURI?if=oic.if.baseline:
+    description: |
+      Baseline representation of a rule contains its common properties
+      displayName: rule-baseline
+      
+      get:
+          description: |
+            Common properties of the rule resource type
+          responses:
+            200:
+              body:
+                application/json:
+                  schema: baseline
+                  example: |
+                  {
+                    "rt": ["oic.r.rule"],
+                    "if": ["oic.if.rw", "oic.if.baseline", "oic.if.ll", "oic.if.b", "oic.if.linkupdate", "oic.if.create", "oic.if.delete" ],
+                    "rts": ["oic.r.temperature", "oic.r.switch.binary", "oic.r.scenevalue" ],
+                    "n": "Thermostat heat-on rule"
+                   }
+                   
+      
+
+
