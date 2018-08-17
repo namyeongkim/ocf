@@ -50,5 +50,129 @@ traits:
                    }
                    
       
+/RuleURI?if=oic.if.ll:
+    description: |
+      Link list representation of a rule contains its links and bindings
+      displayName: rule-linklist
+      
+      get:
+          description: |
+            Links of the rule resource type
+          responses:
+            200:
+              body:
+                application/json:
+                  schema: linklist
+                    example: |
+                      [
+                        {
+                            "rel": ["self", "item"]
+                        },
+                        {
+                            "href": "modeswitch",
+                            "rel": ["item", "ruleinput"],
+                            "rt": "oic.r.switch.binary",
+                            "if": ["oic.if.a", "oic.if.baseline" ]
+                          },
+                          {
+                            "href": "temperature",
+                            "rel": ["item", "ruleinput"],
+                            "rt": "oic.r.temperature",
+                            "if": ["oic.if.a", "oic.if.baseline" ]
+                          },
+                          {
+                            "href": "set-temperature",
+                            "rel": ["item", "ruleinput"],
+                            "rt": "oic.r.temperature",
+                            "if": ["oic.if.a", "oic.if.baseline" ]
+                          },
+                          {
+                             "href": "scenevalue",
+                             "rel": ["item", "ruleaction"],
+                             "rt": "oic.r.scenevalue",
+                             "if": ["oic.if.rw", "oic.if.baseline" ]
+                           },
+                           {
+                             "href": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/switch",
+                             "rel": ["boundto"],
+                             "bind": "obs",
+                             "anchor": "modeswitch",
+                             "if": ["oic.if.s"],
+                             "ins": "377fac40"
+                           },
+                           {
+                              "href": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/temperature",
+                              "rel": ["boundto"],
+                              "bind": "obs",
+                              "anchor": "temperature",
+                              "if": ["oic.if.s"],
+                              "ins": "f33a89b2"
+                           },
+                           {
+                              "href": "scenevalue",
+                              "rel": ["boundto"],
+                              "bind": "push",
+                              "anchor": "ocf://5c68f373-0c4c-4604-9922-db639e20533d/heatcontrol",
+                              "if": ["oic.if.a"],
+                              "ins": "ca5f1004"
+                           },
+                           {
+                              "href": "377fac40",
+                              "rt": "oic.r.linkstatus",
+                              "if": ["oic.if.baseline", "oic.if.rw"]
+                           },
+                           {
+                              "href": "f33a89b2",
+                              "rt": "oic.r.linkstatus",
+                              "if": ["oic.if.baseline", "oic.if.rw"]
+                           },
+                           {
+                              "href": "ca5f1004",
+                              "rt": "oic.r.linkstatus",
+                              "if": ["oic.if.baseline", "oic.if.rw"]
+                           }
+                          ]
 
 
+/RuleURI?if=oic.if.rw:
+    description: |
+      Read/write representation of a rule contains the rule string
+    displayName: rule-rw
+    
+    get:
+        description: |
+          Read/write interface of the rule resource type
+        responses:
+          200:
+            body:
+              application/json:
+                schema: readwrite
+                  example: |
+                     {
+                        "rule": "(switch:value = true) and (temperature:temperature >= set-temp:temperature)",
+                        "ruleresult": false,
+                        "ruleenable": false,
+                        "actionenable": false
+                      }
+                      
+     post:
+       body:
+          application/json:
+            schema: rule-rw
+              example: |
+                {
+                  "rule": "(switch:value = true) and (temperature:temperature >= set-temp:temperature)"
+                }
+          responses:
+            200:
+              body:
+                application/json:
+                  schema: rule-rw
+                    example: |
+                      {
+                        "rule": "(switch:value = true) and (temperature:temperature >= set-temp:temperature)",
+                        "ruleresult": false,
+                        "ruleenable": false,
+                        "actionenable": false
+                       }
+                       
