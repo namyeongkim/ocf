@@ -1,0 +1,22 @@
+#%RAML 0.8
+title: Rule
+version: v0.1.1-20180620
+documentation:
+
+  - title: OCF Copyright
+    content: Copyright (c) 2018 Open Connectivity Foundation, Inc. All rights reserved.
+  - title: OCF License
+    content: !include LICENSE.md
+  - title: OCF Disclaimer
+    content: !include DISCLAIMER.md
+
+
+schemas:
+  - rule-rw: !include schemas/oic.rule-rw-schema.json
+  - baseline: !include schemas/oic.core-schema.json
+  - batch: !include schemas/oic.batch-retrieve-schema.json
+  - linklist: !include schemas/oic.oic-linklist-schema.json
+  - linkupdate: !include schemas/oic.if.linkupdate-schema.json
+  - create: !include schemas/oic.if.create-schema.json
+  - create-response: !include schemas/oic.if.create-response-schema.json
+  - delete-Response: !include schemas/oic.if.delete-response-schema.json
